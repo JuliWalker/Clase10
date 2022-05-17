@@ -1,5 +1,4 @@
 const express = require('express')
-
 const morgan = require('morgan')
 const routesProducts = require('./routes/products')
 
@@ -10,7 +9,13 @@ app.listen(8080)
 console.log(`servidor escuchando en el puerto ${PORT}`)
 
 
+
 app.use(morgan('dev'))
 app.use(express.json())
-app.use(express.static(__dirname+'/public'))
+
+app.set('views','./views')
+app.set('view engine','ejs')
+// app.use(express.static(__dirname+'/public'))
+
 app.use('/api/productos',routesProducts)
+

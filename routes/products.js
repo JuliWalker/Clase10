@@ -22,8 +22,11 @@ router.post('/', (req, res) => {
 
 router.get('/', (req, res) => {
     let allProductos = container.getAll()
-    let allProductosStr = JSON.stringify(allProductos)
-    res.send(`Los productos contenidos en el servidor son ${allProductosStr} `)
+    console.log(allProductos)
+    res.render('mostrarProducto',allProductos);
+    
+//    let allProductosStr = JSON.stringify(allProductos)
+//   res.send(`Los productos contenidos en el servidor son ${allProductosStr} `)
 })
 
 router.get('/:id', (req, res) => {
