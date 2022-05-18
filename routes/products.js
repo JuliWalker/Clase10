@@ -8,11 +8,11 @@ const container = new Container(file);
 
 
 router.post('/', (req, res) => {
-    const nuevoProducto = req.body
-    console.log(nuevoProducto)
-    if (nuevoProducto.title !== undefined && nuevoProducto.price !== undefined && nuevoProducto.thumbnail !== undefined) {
-        if (nuevoProducto.title.length > 0 && nuevoProducto.price > 0 && nuevoProducto.thumbnail.length > 0) {
-            const ID = container.saveNew(nuevoProducto)
+    const  body  = req.body;
+    console.log(body)
+    if (body.title !== undefined && body.price !== undefined && body.thumbnail !== undefined) {
+        if (body.title.length > 0 && body.price > 0 && body.thumbnail.length > 0) {
+            const ID = container.saveNew(body)
             res.redirect('/')
         } else
             res.json(`no puedes crear un objecto con campos vacios`)
@@ -24,12 +24,9 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
     let allProductos = container.getAll()
     res.render('mostrarProducto', {allProductos});
-    
-//    let allProductosStr = JSON.stringify(allProductos)
-//   res.send(`Los productos contenidos en el servidor son ${allProductosStr} `)
 })
 
-router.get('/:id', (req, res) => {
+/* router.get('/:id', (req, res) => {
     const id = req.params
     console.log(id.id)
     productoSeleccionado = container.getById(id.id)
@@ -64,6 +61,6 @@ router.put('/:id', (req, res) => {
     } else {
         res.json(`tu producto no tiene el formato correcto`)
     }
-})
+}) */
 
 module.exports = router
