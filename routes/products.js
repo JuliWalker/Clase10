@@ -9,10 +9,11 @@ const container = new Container(file);
 
 router.post('/', (req, res) => {
     const nuevoProducto = req.body
+    console.log(nuevoProducto)
     if (nuevoProducto.title !== undefined && nuevoProducto.price !== undefined && nuevoProducto.thumbnail !== undefined) {
         if (nuevoProducto.title.length > 0 && nuevoProducto.price > 0 && nuevoProducto.thumbnail.length > 0) {
             const ID = container.saveNew(nuevoProducto)
-            res.json(`producto cargado con exito. El ID asignado es: ${ID}`)
+            res.redirect('/')
         } else
             res.json(`no puedes crear un objecto con campos vacios`)
     } else {
@@ -22,8 +23,7 @@ router.post('/', (req, res) => {
 
 router.get('/', (req, res) => {
     let allProductos = container.getAll()
-    console.log(allProductos)
-    res.render('mostrarProducto',allProductos);
+    res.render('mostrarProducto', {allProductos});
     
 //    let allProductosStr = JSON.stringify(allProductos)
 //   res.send(`Los productos contenidos en el servidor son ${allProductosStr} `)

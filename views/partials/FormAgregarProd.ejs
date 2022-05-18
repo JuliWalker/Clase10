@@ -1,7 +1,19 @@
 <h2>Formulario para agregar productos</h2>
-<form action="/api/productos/" method="POST">
-    Title: <input type="text" name="title" />
+<form action="/api/productos" method="post">
+    <div class="my-2">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" placeholder="title" value="" name="title">
+    </div>
+    <div class="my-2">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" placeholder="price" value="" name="price">
+    </div>
+    <div class="my-2">
+        <label for="thumbnail">URL</label>
+        <input type="text" class="form-control" placeholder="thumbnail" value="" name="thumbnail">
+    </div>
+<!--     Title: <input type="text" name="title" />
     Price: <input type="number" name="price" />
-    URL: <input type="text" name="thumbnail" />
-    <button>Cargar producto</button>
+    URL: <input type="text" name="thumbnail" /> -->
+    <button class="btn btn-primary my-2">Cargar producto</button>
 </form>

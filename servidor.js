@@ -15,7 +15,10 @@ app.use(express.json())
 
 app.set('views','./views')
 app.set('view engine','ejs')
-// app.use(express.static(__dirname+'/public'))
 
 app.use('/api/productos',routesProducts)
+
+app.get('/', (req, res) => {
+    res.render('index');
+})
 
