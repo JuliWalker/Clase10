@@ -1,6 +1,20 @@
 const { Router } = require('express')
 const router = Router()
 const Container = require('../contenedor')
+const multer = require('multer')
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'routes/public/files')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+router.use(multer({
+    storage
+}).single('thumbnail'))
 
 
 const file = './products.txt';
@@ -9,9 +23,12 @@ const container = new Container(file);
 
 router.post('/', (req, res) => {
     const  body  = req.body;
+    const photo = req.file
+    const baseImgRoute = "../routes/public/files/"
+    body.thumbnail = baseImgRoute.concat(photo.filename)
     console.log(body)
     if (body.title !== undefined && body.price !== undefined && body.thumbnail !== undefined) {
-        if (body.title.length > 0 && body.price > 0 && body.thumbnail.length > 0) {
+        if (body.title.length > 0 && body.price > 0) {
             const ID = container.saveNew(body)
             res.redirect('/')
         } else
